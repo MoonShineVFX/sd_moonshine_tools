@@ -6,17 +6,18 @@ from modules.call_queue import wrap_gradio_gpu_call
 from modules.shared import cmd_opts, opts, OptionInfo
 from modules.ui import setup_progressbar
 from pathlib import Path
-from scripts.ui import ui_ffmpeg, ui_controlnet
+from scripts.ui import ffmpeg, controlnet
 
 def on_ui_tabs():
     with gr.Blocks() as moonshine_tools_interface:
-        with gr.Tab("FFmpeg"):
-            with gr.Column(variant="panel"): 
-                ui_ffmpeg()
-        with gr.Tab("ControlNet"):
-            with gr.Column(variant="panel"): 
-                ui_controlnet()
-                        
+        with gr.Row():
+            with gr.Tab("FFmpeg"):
+                with gr.Column(variant="panel"): 
+                    ffmpeg.ui()
+            with gr.Tab("ControlNet"):
+                with gr.Column(variant="panel"): 
+                    controlnet.ui()
+                            
     return (moonshine_tools_interface, "Moonshine Tools", "moonshine_interface"), 
 
 setting_path = str(Path(paths.script_path) / "sd_moonshine_tools")
